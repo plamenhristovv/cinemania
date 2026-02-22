@@ -1,0 +1,162 @@
+.list-detail-header {
+    padding: 60px 0;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(229, 9, 20, 0.1), transparent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 60px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.list-name {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    letter-spacing: -1px;
+}
+
+.list-description {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #bbb;
+    line-height: 1.7;
+}
+
+.list-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.list-stat-badge {
+    background-color: rgba(255, 255, 255, 0.07);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    color: #eee;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-stat-badge strong {
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+
+
+.list-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-action {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-edit {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #f40612;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+.btn-delete:hover {
+    background-color: #ff4d4d;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+}
+
+.movies-section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.movies-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.empty-list-message {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    color: #777;
+    font-size: 1.1rem;
+}
+
+.empty-list-message p {
+    margin-bottom: 25px;
+}
+
+.back-link-container {
+    margin-top: 60px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.btn-back {
+    color: #888;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-back:hover {
+    color: white;
+    transform: translateX(-5px);
+}
+
+@media (max-width: 768px) {
+    .list-name {
+        font-size: 2.5rem;
+    }
+    .list-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-action {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
