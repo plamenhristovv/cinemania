@@ -27,7 +27,7 @@
         <div class="director-grid">
             {% for director in directors %}
                 <div class="director-card">
-                    <a href="{% url 'directors:detail' pk=director.pk %}">
+                    <a href="{% url 'directors:details' pk=director.pk %}">
                         <div class="director-image-wrapper">
                             <img src="{{ director.image_url }}" alt="{{ director.name }}">
                         </div>
@@ -35,7 +35,7 @@
                     <div class="director-info">
                         <h4>{{ director.name }}</h4>
                         <div class="movie-count">
-                            {{ director.movies_count }} Movie{{ director.movies_count|pluralize }}
+                            {{ director.movie_count }} Movie{{ director.movie_count|pluralize }}
                         </div>
                     </div>
                 </div>

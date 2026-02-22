@@ -31,6 +31,9 @@
                         <div class="list-info">
                             <h4>{{ list_obj.name }}</h4>
                             <p>{{ list_obj.description }}</p>
+                            <div class="movie-count">
+                            {{ list_obj.movie_count }} Movie{{ list_obj.movie_count|pluralize }}
+                            </div>
                         </div>
                     </a>
                 </div>

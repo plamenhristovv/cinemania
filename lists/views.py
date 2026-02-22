@@ -13,7 +13,7 @@ class ListsListView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        queryset = super().get_queryset().prefetch_related('movies')
+        queryset = super().get_queryset().prefetch_related('movies').annotate(movie_count=Count('movies'))
         form = SearchListForm(self.request.GET)
         if form.is_valid():
             query = form.cleaned_data.get('query')

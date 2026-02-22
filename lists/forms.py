@@ -6,12 +6,12 @@ from movies.models import Movie
 
 
 class ListFormBasic(forms.ModelForm):
-    movies = forms.MultipleChoiceField()
+
 
 
     class Meta:
         model = List
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'movies']
 
         widgets = {
             "name": forms.TextInput(attrs={'placeholder': 'My Top 10 Movies'}),
@@ -27,9 +27,9 @@ class ListFormBasic(forms.ModelForm):
             },
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['movies'].queryset = Movie.objects.all()
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['movies'].queryset = Movie.objects.all()
 
 class ListCreateForm(ListFormBasic):
     pass

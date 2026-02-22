@@ -120,7 +120,6 @@
     border-color: #666;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .movie-form {
         grid-template-columns: 1fr;

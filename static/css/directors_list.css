@@ -72,7 +72,6 @@
     box-shadow: 0 5px 15px rgba(245, 197, 24, 0.4);
 }
 
-/* Director Grid */
 .director-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

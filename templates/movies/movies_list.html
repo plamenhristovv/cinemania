@@ -26,8 +26,9 @@
 
         <div class="movie-grid">
             {% for movie in movies %}
+            
                 <div class="movie-card">
-                    <a href="{% url 'movies:detail' slug=movie.slug %}">
+                    <a href="{% url 'movies:details' slug=movie.slug %}">
                         <div class="movie-image-wrapper">
                             <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
                         </div>

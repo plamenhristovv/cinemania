@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shared/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}{{ list_obj.name }} - Cinemania{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/movies_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/list_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="list-detail-header">
+    <div class="container">
+        <h1 class="list-name">{{ list_obj.name }}</h1>
+        <p class="list-description">{{ list_obj.description }}</p>
+        
+        <div class="list-stats">
+            <span class="list-stat-badge">
+                <strong>{{ list_obj.movies.count }}</strong> Movies
+            </span>
+        </div>
+        
+        <div class="list-actions">
+            <a href="{% url 'lists:edit' list_obj.pk %}" class="btn-action btn-edit">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Edit List
+            </a>
+            <a href="{% url 'lists:delete' list_obj.pk %}" class="btn-action btn-delete">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="movies-section-title">Movies in this List</h2>
+    
+    <div class="movie-grid">
+        {% for movie in list_obj.movies.all %}
+            <div class="movie-card">
+                <a href="{% url 'movies:details' slug=movie.slug %}">
+                    <div class="movie-image-wrapper">
+                        <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
+                    </div>
+                </a>
+                <div class="movie-info">
+                    <h4>{{ movie.title }}</h4>
+                    <p>{{ movie.release_year }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <div class="no-results">
+                <p>No movies in this list yet.</p>
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'lists:edit' list_obj.pk %}" class="btn-edit" style="padding: 10px 20px; border-radius: 20px; text-decoration: none; display: inline-block;">Add Movies</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="back-link-container">
+        <a href="{% url 'lists:list' %}" class="btn-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to All Lists
+        </a>
+    </div>
+</div>
+{% endblock %}
