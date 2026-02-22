@@ -1,0 +1,65 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block title %}Cinemania - Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Unleash the Magic of Cinema</h1>
+        <p>Your one-stop destination for movies, directors, and curated watchlists. Discover something new today.</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>{{ movies_count }}</h3>
+            <p>Movies</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ directors_count }}</h3>
+            <p>Directors</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ lists_count }}</h3>
+            <p>Lists</p>
+        </div>
+    </div>
+
+    {% if latest_movies %}
+    <h2 class="section-title">Latest Additions</h2>
+    <div class="movie-grid">
+        {% for movie in latest_movies %}
+        <div class="movie-card">
+            <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
+            <div class="movie-info">
+                <h4>{{ movie.title }}</h4>
+                <p>{{ movie.release_year }} | {{ movie.genre }}</p>
+                <p>By {{ movie.director.name }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2 class="section-title">Explore Cinema</h2>
+    <p style="text-align: center; color: #777;">Start adding movies and directors to see them here!</p>
+    {% endif %}
+
+    <section class="about-section" style="margin: 80px 0; text-align: center;">
+        <h2 class="section-title">Why Cinemania?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px;">
+            <div class="feature">
+                <span style="font-size: 3rem; color: var(--primary-color);">📂</span>
+                <h3>Organize Your Watchlist</h3>
+                <p>Create and share custom lists of your favorite films to keep track of what you've seen and what's next.</p>
+            </div>
+            <div class="feature">
+                <span style="font-size: 3rem; color: var(--primary-color);">🎥</span>
+                <h3>Meet the Masters</h3>
+                <p>Learn about the visionary directors behind the lens and explore their entire bodies of work.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

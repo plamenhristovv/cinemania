@@ -1,0 +1,67 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/directors_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <h1 class="section-title">{{ page_title }}</h1>
+
+        <div class="section-header">
+            <div class="search-container">
+                <form action="{% url 'directors:list' %}" method="get" class="search-form">
+                    {{ search_form.query }}
+                    <button type="submit" class="btn-search">Search</button>
+                </form>
+            </div>
+
+            <div class="add-director-container">
+                <a href="{% url 'directors:add' %}" class="btn-add">
+                    <span>+</span> Add Director
+                </a>
+            </div>
+        </div>
+
+        <div class="director-grid">
+            {% for director in directors %}
+                <div class="director-card">
+                    <a href="{% url 'directors:detail' pk=director.pk %}">
+                        <div class="director-image-wrapper">
+                            <img src="{{ director.image_url }}" alt="{{ director.name }}">
+                        </div>
+                    </a>
+                    <div class="director-info">
+                        <h4>{{ director.name }}</h4>
+                        <div class="movie-count">
+                            {{ director.movies_count }} Movie{{ director.movies_count|pluralize }}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-results">
+                    <p>No directors found.</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if is_paginated %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}" class="pagination-link">&laquo; First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}" class="pagination-link">Previous</a>
+                {% endif %}
+
+                <span class="pagination-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}" class="pagination-link">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.query %}&query={{ request.GET.query }}{% endif %}" class="pagination-link">Last &raquo;</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
