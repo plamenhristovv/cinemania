@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shared/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}Manage List: {{ list_obj.name }} - Cinemania{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/list_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+    <h1 class="form-title">Edit List</h1>
+        <form method="post" class="list-form" novalidate>
+            {% csrf_token %}
+
+             {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-list">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Update List Info</button>
+                <a href="{% url 'lists:details' list_obj.pk %}" class="btn-cancel">Discard Changes</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shared/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}Delete List - {{ list_obj.name }}{% endblock %}
+            {{ form }}
+      {% csrf_token %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/list_delete.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="delete-container">
+        <div class="delete-header">
+            <span class="delete-icon">⚠️</span>
+            <h1 class="delete-title">Delete List?</h1>
+
+            
+            <p class="delete-warning">
+                Are you sure you want to delete the list <span class="list-title-preview">"{{ list_obj.name }}"</span>?
+                This action cannot be undone.
+            </p>
+        </div>
+
+
+        <form method="post" class="delete-actions">
+            {% csrf_token %}
+            <button type="submit" class="btn-confirm-delete">Yes, Delete List</button>
+            <a href="{% url 'lists:details' list_obj.pk %}" class="btn-keep">No, Keep List</a>
+        </form>
+    </div>
+{% endblock %}

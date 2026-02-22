@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shared/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}{{ director.name }} - Cinemania{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/director_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="director-detail-container">
+    <div class="container">
+        <!-- Director Profile Section -->
+        <article class="director-profile">
+            <div class="director-image-wrapper">
+                <img src="{{ director.image_url }}" alt="{{ director.name }}">
+            </div>
+            <div class="director-info">
+                <h1 class="director-name">{{ director.name }}</h1>
+                <div class="director-description">
+                    {{ director.description|linebreaks }}
+                </div>
+                <div class="director-actions">
+                    <a href="{% url 'directors:edit' director.pk %}" class="btn-edit-director">Edit</a>
+                    <a href="{% url 'directors:delete' director.pk %}" class="btn-delete-director">Delete</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Filmography Section -->
+        <section class="filmography">
+            <h2 class="filmography-title">Directed Movies</h2>
+            
+            {% if director.movies.all %}
+                <div class="movie-grid">
+                    {% for movie in director.movies.all %}
+                        <div class="movie-card">
+                            <a href="{% url 'movies:details' movie.slug %}">
+                                <div class="movie-card-image">
+                                    <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
+                                </div>
+                                <div class="movie-card-content">
+                                    <span class="movie-card-title">{{ movie.title }}</span>
+                                    <div class="movie-card-meta">
+                                        <span>{{ movie.release_year }}</span> • <span>{{ movie.genre }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center" style="color: #666; margin-top: 40px;">No movies found for this director.</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+    <a href="{% url 'directors:list' %}" class="btn-cancel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 5px;">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Back to Directors
+    </a>
+</div>
+</div>
+{% endblock %}

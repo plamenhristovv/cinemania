@@ -1,6 +1,5 @@
 from django import forms
 
-from common.mixins import DisableFormFieldsMixin
 from directors.models import Director
 
 
@@ -28,12 +27,12 @@ class DirectorFormBasic(forms.ModelForm):
         }
 
 class DirectorCreateForm(DirectorFormBasic):
-    pass
+    ...
 
 class DirectorUpdateForm(DirectorFormBasic):
-    pass
+    ...
 
-class DirectorDeleteForm(DisableFormFieldsMixin, DirectorFormBasic):
+class DirectorDeleteForm(DirectorFormBasic):
     ...
 
 

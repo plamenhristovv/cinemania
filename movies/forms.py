@@ -1,6 +1,5 @@
 from django import forms
 
-from common.mixins import DisableFormFieldsMixin
 from movies.models import Movie
 
 
@@ -14,10 +13,13 @@ class MovieFormBasic(forms.ModelForm):
             "title": forms.TextInput(attrs={'placeholder': 'Inception'}),
             "tagline": forms.TextInput(attrs={'placeholder': 'Your mind is the scene of the crime'}),
             "description": forms.Textarea(attrs={'placeholder': 'Description of this movie goes here'}),
+            "release_year": forms.NumberInput(attrs={'placeholder': '2010'}),
+            "image_url": forms.URLInput(attrs={'placeholder': 'Enter an link to an image of the movie poster'}),
+            "runtime": forms.NumberInput(attrs={'placeholder': '148 minutes'}),
         }
         error_messages = {
             'title': {
-                'required': 'The movie title is required.',
+                'required': 'Please enter the movie title.',
             },
             'release_year': {
                 'required': 'Please enter the release year.',
@@ -42,7 +44,7 @@ class MovieCreateForm(MovieFormBasic):
 class MovieUpdateForm(MovieFormBasic):
     ...
 
-class MovieDeleteForm(DisableFormFieldsMixin, MovieFormBasic):
+class MovieDeleteForm(MovieFormBasic):
     ...
 
 

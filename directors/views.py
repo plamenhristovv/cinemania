@@ -54,7 +54,6 @@ class DirectorUpdateView(UpdateView):
 
 class DirectorDeleteView(DeleteView):
     model = Director
-    form_class = DirectorDeleteForm
     template_name = 'directors/director_delete.html'
     success_url = reverse_lazy('directors:list')
     pk_url_kwarg = 'pk'

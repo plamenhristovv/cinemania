@@ -1,6 +1,5 @@
 from django import forms
 
-from common.mixins import DisableFormFieldsMixin
 from lists.models import List
 from movies.models import Movie
 
@@ -37,7 +36,7 @@ class ListCreateForm(ListFormBasic):
 class ListUpdateForm(ListFormBasic):
     pass
 
-class ListDeleteForm(DisableFormFieldsMixin, ListFormBasic):
+class ListDeleteForm(ListFormBasic):
     ...
 
 

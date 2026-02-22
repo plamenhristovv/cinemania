@@ -8,7 +8,7 @@ class MovieListView(ListView):
     model = Movie
     template_name = 'movies/movies_list.html'
     context_object_name = 'movies'
-    paginate_by = 12
+    paginate_by = 4
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -52,6 +52,7 @@ class MovieUpdateView(UpdateView):
 
 class MovieDeleteView(DeleteView):
     model = Movie
+    context_object_name = 'movie'
     template_name = 'movies/movie_delete.html'
     success_url = reverse_lazy('movies:list')
     slug_url_kwarg = 'slug'
