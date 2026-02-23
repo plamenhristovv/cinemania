@@ -26,9 +26,7 @@ class ListFormBasic(forms.ModelForm):
             },
         }
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['movies'].queryset = Movie.objects.all()
+
 
 class ListCreateForm(ListFormBasic):
     pass

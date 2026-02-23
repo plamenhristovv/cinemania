@@ -31,7 +31,7 @@ class Movie(models.Model):
     title = models.CharField(
         max_length=30,
         validators=[
-            MinLengthValidator(1)
+            MinLengthValidator(1, 'Provide at least one character for a title. Example: X')
         ]
     )
     tagline = models.CharField(

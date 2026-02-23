@@ -1,0 +1,21 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block title %}404 - Page Not Found | Cinemania{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-content">
+        <h1>404</h1>
+        <h2>Oops! Page Not Found</h2>
+        <img src="{% static 'images/i-cant-find-it-anywhere.gif' %}" alt="I can't find it anywhere" class="error-gif">
+        <div class="error-actions">
+            <a href="{% url 'common:home' %}" class="btn-primary">Go Back Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@
 <section class="hero">
     <div class="container">
         <h1>Unleash the Magic of Cinema</h1>
-        <p>Your one-stop destination for movies, directors, and curated watchlists. Discover something new today.</p>
+        <p>Your one-stop destination for movies, directors, and curated watchlists.</p>
     </div>
 </section>
 
@@ -28,7 +28,7 @@
     </div>
 
     {% if latest_movies %}
-    <h2 class="section-title">Latest Additions</h2>
+    <h2 class="section-title">Latest Movie Additions</h2>
     <div class="movie-grid">
         {% for movie in latest_movies %}
         <div class="movie-card">
@@ -50,12 +50,12 @@
         <h2 class="section-title">Why Cinemania?</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px;">
             <div class="feature">
-                <span style="font-size: 3rem; color: var(--primary-color);">📂</span>
+                <span style="font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-file"></i></span>
                 <h3>Organize Your Watchlist</h3>
                 <p>Create and share custom lists of your favorite films to keep track of what you've seen and what's next.</p>
             </div>
             <div class="feature">
-                <span style="font-size: 3rem; color: var(--primary-color);">🎥</span>
+                <span style="font-size: 3rem; color: var(--primary-color);"><i class="fa-solid fa-video"></i></span>
                 <h3>Meet the Masters</h3>
                 <p>Learn about the visionary directors behind the lens and explore their entire bodies of work.</p>
             </div>
