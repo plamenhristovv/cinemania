@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 
-{% block title %}Sign Up - Cinemania{% endblock %}
+{% block title %}Login - Cinemania{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/movie_form.css' %}">
@@ -9,16 +9,16 @@
 
 {% block content %}
 <div class="form-container">
-    <h1>Create an Account</h1>
-    <form method="post" action="{% url 'accounts:signup' %}">
+    <h1>Login</h1>
+    <form method="post">
         {% csrf_token %}
         <div class="form-group">
             {{ form.as_p }}
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
-    <p>Already have an account? <a href="{% url 'accounts:login' %}">Login here</a></p>
+    <p>Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up here</a></p>
 </div>
 {% endblock %}
