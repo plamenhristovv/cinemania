@@ -6,6 +6,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     bio = models.TextField(null= True, blank=True)
+    movies = models.ManyToManyField('movies.Movie', null= True, blank=True)
 
     def __str__(self):
         return self.user.username

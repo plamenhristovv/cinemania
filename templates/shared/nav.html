@@ -5,6 +5,17 @@
         <li><a href="{% url 'movies:list' %}">Movies</a></li>
         <li><a href="{% url 'directors:list' %}">Directors</a></li>
         <li><a href="{% url 'lists:list' %}">Lists</a></li>
-        <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'accounts:details' pk=user.pk %}">Profile</a></li>
+            <li>
+                <form action="{% url 'accounts:logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn" style="background:none; border:none; color:inherit; cursor:pointer; font:inherit;">Logout</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+        {% endif %}
     </ul>
 </nav>

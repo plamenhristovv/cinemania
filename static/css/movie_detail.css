@@ -138,6 +138,32 @@
     box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
 }
 
+.btn-action.btn-add {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-remove {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-remove:hover {
+    background-color: #e0a800;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
 .btn-delete {
     background-color: transparent;
     color: #ff4d4d;
@@ -246,3 +272,4 @@
         justify-content: center;
     }
 }
+

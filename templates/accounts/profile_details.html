@@ -1,0 +1,89 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block title %}{{ profile.username }}'s Profile - Cinemania{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/profile_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+        <header class="profile-header">
+            <div class="profile-avatar">
+                {{ profile.username|slice:":1"|upper }}
+            </div>
+            <div class="profile-main-info">
+                <h1 class="profile-username">{{ profile.username }}</h1>
+                <p class="profile-full-name">
+                    {% if profile.first_name or profile.last_name %}
+                        {{ profile.first_name }} {{ profile.last_name }}
+                    {% else %}
+                        No Name Provided
+                    {% endif %}
+                </p>
+                <div class="profile-meta-header">
+                    <span class="profile-meta-item">
+                        <i class="fas fa-envelope"></i> {{ profile.email }}
+                    </span>
+                    <span class="profile-meta-item">
+                        <i class="fas fa-calendar-alt"></i> Joined {{ profile.date_joined|date:"F Y" }}
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <div class="profile-content">
+            <section class="profile-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i> Bio
+                </h2>
+                <div class="bio-text">
+                    {% if profile.profile.bio %}
+                        {{ profile.profile.bio }}
+                    {% else %}
+                        No bio available.
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="profile-section">
+                <h2 class="section-title">
+                    <i class="fas fa-film"></i> Movies Watched
+                </h2>
+                {% if profile.profile.movies.all %}
+                    <div class="movies-grid">
+                        {% for movie in profile.profile.movies.all %}
+                        <a href="{% url 'movies:details' slug=movie.slug %}" class="movie-card-mini">
+                            <img src="{{ movie.image_url }}" alt="{{ movie.title }}">
+                            <div class="movie-card-content">
+                                <h3 class="movie-card-title">{{ movie.title }}</h3>
+                                <p class="movie-card-year">{{ movie.release_year }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open"></i>
+                        <p>No movies watched yet.</p>
+                        <a href="{% url 'movies:list' %}" class="btn btn-primary" style="margin-top: 15px; display: inline-block;">Explore Movies</a>
+                    </div>
+                {% endif %}
+            </section>
+
+            {% if user.pk == profile.pk %}
+            <div class="profile-actions">
+                <a href="{% url 'accounts:edit' pk=user.pk %}" class="btn btn-secondary">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+                <a href="{% url 'accounts:delete' pk=user.pk %}" class="btn btn-outline-danger">
+                    <i class="fas fa-trash"></i> Delete Account
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
