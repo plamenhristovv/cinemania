@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-PROJECT_APPS = ['directors', 'movies', 'lists', 'common']
+PROJECT_APPS = ['directors', 'movies', 'lists', 'common', 'accounts']
 
 # Application definition
 
