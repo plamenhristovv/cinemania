@@ -4,6 +4,7 @@
         <li><a href="{%url 'common:home' %}">Home</a></li>
         <li><a href="{% url 'movies:list' %}">Movies</a></li>
         <li><a href="{% url 'directors:list' %}">Directors</a></li>
+        <li><a href="{% url 'studios:list' %}">Studios</a></li>
         <li><a href="{% url 'lists:list' %}">Lists</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'accounts:details' pk=user.pk %}">Profile</a></li>
