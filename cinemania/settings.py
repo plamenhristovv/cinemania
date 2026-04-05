@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-PROJECT_APPS = ['directors', 'movies', 'lists', 'common', 'accounts']
+PROJECT_APPS = ['directors', 'movies', 'lists', 'common', 'accounts', 'studios_api']
 
 # Application definition
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_spectacular',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -89,6 +91,18 @@ DATABASES = {
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Cinemania Studio API',
+    'DESCRIPTION': 'Studio API for Cinemania project',
+    'VERSION': '1.0.0',
 }
 
 
