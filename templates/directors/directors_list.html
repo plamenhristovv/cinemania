@@ -17,11 +17,13 @@
                 </form>
             </div>
 
+            {% if perms.directors.add_director %}
             <div class="add-director-container">
                 <a href="{% url 'directors:add' %}" class="btn-add">
                     <span>+</span> Add Director
                 </a>
             </div>
+            {% endif %}
         </div>
 
         <div class="director-grid">

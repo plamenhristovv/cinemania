@@ -54,6 +54,8 @@
                         </button>
                     </form>
                 {% endif %}
+
+                {% if perms.movies.change_movie %}
                 <a href="{% url 'movies:edit' movie.slug %}" class="btn-action btn-edit">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -61,6 +63,9 @@
                     </svg>
                     Edit Movie
                 </a>
+                {% endif %}
+
+                {% if perms.movies.delete_movie %}
                 <a href="{% url 'movies:delete' movie.slug %}" class="btn-action btn-delete">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="3 6 5 6 21 6"></polyline>
@@ -68,6 +73,7 @@
                     </svg>
                     Delete
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>

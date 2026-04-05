@@ -17,11 +17,13 @@
                 </form>
             </div>
 
+            {% if perms.movies.add_movie %}
             <div class="add-movie-container">
                 <a href="{% url 'movies:add' %}" class="btn-add">
                     <span>+</span> Add Movie
                 </a>
             </div>
+            {% endif %}
         </div>
 
         <div class="movie-grid">

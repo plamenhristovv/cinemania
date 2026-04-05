@@ -20,10 +20,12 @@
                 <div class="director-description">
                     {{ director.description|linebreaks }}
                 </div>
+                {% if perms.directors.change.director and perms.directors.delete_director %}
                 <div class="director-actions">
                     <a href="{% url 'directors:edit' director.pk %}" class="btn-edit-director">Edit</a>
                     <a href="{% url 'directors:delete' director.pk %}" class="btn-delete-director">Delete</a>
                 </div>
+                {% endif %}
             </div>
         </article>
 

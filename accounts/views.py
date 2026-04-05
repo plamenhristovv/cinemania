@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -29,7 +30,14 @@ def toggle_movie_in_profile(request, movie_id):
 class SignUpView(CreateView):
     form_class = UserRegistrationForm
     template_name = 'accounts/signup.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('accounts:login')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        viewer_group = Group.objects.get(name='Viewers')
+        self.object.groups.add(viewer_group)
+        return response
+
 
 class UserLoginView(LoginView):
     template_name = 'accounts/login.html'

@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from movies.models import Movie
 from movies.forms import MovieCreateForm, MovieUpdateForm, SearchMovieForm
 
 
-class MovieListView(ListView):
+class MovieListView(LoginRequiredMixin, ListView):
     model = Movie
     template_name = 'movies/movies_list.html'
     context_object_name = 'movies'
@@ -26,33 +27,36 @@ class MovieListView(ListView):
         return context
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(LoginRequiredMixin, DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
     slug_url_kwarg = 'slug'
 
 
-class MovieCreateView(CreateView):
+class MovieCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Movie
     form_class = MovieCreateForm
     template_name = 'movies/movie_add.html'
     success_url = reverse_lazy('movies:list')
+    permission_required = 'movies.add_movie'
 
 
-class MovieUpdateView(UpdateView):
+class MovieUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Movie
     form_class = MovieUpdateForm
     template_name = 'movies/movie_edit.html'
     slug_url_kwarg = 'slug'
+    permission_required = 'movies.change_movie'
 
     def get_success_url(self):
         return reverse_lazy('movies:details', kwargs={'slug': self.object.slug})
 
 
-class MovieDeleteView(DeleteView):
+class MovieDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Movie
     context_object_name = 'movie'
     template_name = 'movies/movie_delete.html'
     success_url = reverse_lazy('movies:list')
     slug_url_kwarg = 'slug'
+    permission_required = 'movies.delete_movie'
