@@ -10,7 +10,7 @@ from .forms import SearchStudioForm
 
 
 
-class StudioListView(LoginRequiredMixin, ListView):
+class StudioListView(ListView):
     model = Studio
     template_name = 'studios/studio_list.html'
     context_object_name = 'studios'
@@ -31,7 +31,7 @@ class StudioListView(LoginRequiredMixin, ListView):
         context['page_title'] = 'Movie Studios'
         return context
 
-class StudioDetailView(LoginRequiredMixin, DetailView):
+class StudioDetailView(DetailView):
     model = Studio
     template_name = 'studios/studio_detail.html'
     context_object_name = 'studio'

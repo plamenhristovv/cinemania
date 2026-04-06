@@ -40,6 +40,19 @@
                 <h3>Plot</h3>
                 <p>{{ movie.description }}</p>
             </div>
+
+            {% if movie.studios_api.all %}
+            <div class="movie-studios">
+                <h3>Studios</h3>
+                <div class="studios-list">
+                    {% for studio in movie.studios_api.all %}
+                        <a href="{% url 'studios:details' studio.pk %}" class="studio-tag">
+                            <i class="fas fa-building"></i> {{ studio.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
             
             <div class="movie-actions">
                 {% if user.is_authenticated %}

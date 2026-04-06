@@ -7,19 +7,25 @@ def create_groups(apps, schema_editor):
     Permission = apps.get_model('auth', 'Permission')
     ContentType = apps.get_model('contenttypes', 'ContentType')
 
-    # Define groups
     editor_group, _ = Group.objects.get_or_create(name='Editors')
     viewer_group, _ = Group.objects.get_or_create(name='Viewers')
 
-    # Get Content Types
-    # It's better to fetch by app_label and model to avoid issues in migrations
-    movie_ct = ContentType.objects.get(app_label='movies', model='movie')
-    director_ct = ContentType.objects.get(app_label='directors', model='director')
-    list_ct = ContentType.objects.get(app_label='lists', model='list')
+    movie_ct, _ = ContentType.objects.get_or_create(app_label='movies', model='movie')
+    director_ct, _ = ContentType.objects.get_or_create(app_label='directors', model='director')
+    list_ct, _ = ContentType.objects.get_or_create(app_label='lists', model='list')
 
-    # Editor permissions
-    # Movies & Directors: Full CRUD (Add, Change, Delete, View)
-    # Lists: All permissions
+    def ensure_permission(ct, codename, name):
+        Permission.objects.get_or_create(
+            content_type=ct,
+            codename=codename,
+            defaults={'name': name}
+        )
+
+    for ct, model_name in [(movie_ct, 'movie'), (director_ct, 'director'), (list_ct, 'list')]:
+        for action in ['add', 'change', 'delete', 'view']:
+            ensure_permission(ct, f'{action}_{model_name}', f'Can {action} {model_name}')
+
+
     editor_movie_perms = Permission.objects.filter(
         content_type=movie_ct, 
         codename__in=['add_movie', 'change_movie', 'delete_movie', 'view_movie']
@@ -32,9 +38,7 @@ def create_groups(apps, schema_editor):
 
     editor_group.permissions.set(list(editor_movie_perms) + list(editor_director_perms) + list(all_list_perms))
 
-    # Viewer permissions
-    # Movies & Directors: View only
-    # Lists: All permissions
+
     viewer_movie_perms = Permission.objects.filter(content_type=movie_ct, codename='view_movie')
     viewer_director_perms = Permission.objects.filter(content_type=director_ct, codename='view_director')
     

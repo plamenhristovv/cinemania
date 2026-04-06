@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Count
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -35,14 +36,14 @@ class DirectorDetailView(DetailView):
     pk_url_kwarg = 'pk'
 
 
-class DirectorCreateView(CreateView):
+class DirectorCreateView(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
     model = Director
     form_class = DirectorCreateForm
     template_name = 'directors/director_add.html'
     success_url = reverse_lazy('directors:list')
 
 
-class DirectorUpdateView(UpdateView):
+class DirectorUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView):
     model = Director
     form_class = DirectorUpdateForm
     template_name = 'directors/director_edit.html'
@@ -52,7 +53,7 @@ class DirectorUpdateView(UpdateView):
         return reverse_lazy('directors:details', kwargs={'pk': self.object.pk})
 
 
-class DirectorDeleteView(DeleteView):
+class DirectorDeleteView(LoginRequiredMixin, PermissionRequiredMixin,DeleteView):
     model = Director
     template_name = 'directors/director_delete.html'
     success_url = reverse_lazy('directors:list')

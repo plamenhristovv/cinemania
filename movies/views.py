@@ -5,7 +5,7 @@ from movies.models import Movie
 from movies.forms import MovieCreateForm, MovieUpdateForm, SearchMovieForm
 
 
-class MovieListView(LoginRequiredMixin, ListView):
+class MovieListView(ListView):
     model = Movie
     template_name = 'movies/movies_list.html'
     context_object_name = 'movies'
@@ -27,7 +27,7 @@ class MovieListView(LoginRequiredMixin, ListView):
         return context
 
 
-class MovieDetailView(LoginRequiredMixin, DetailView):
+class MovieDetailView(DetailView):
     model = Movie
     template_name = 'movies/movie_detail.html'
     context_object_name = 'movie'
