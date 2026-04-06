@@ -3,6 +3,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from accounts.models import Profile
+from accounts.tasks import send_mail_notification
+
 
 UserModel = get_user_model()
 
@@ -10,3 +12,5 @@ UserModel = get_user_model()
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        send_mail_notification.delay(instance.email)
+
