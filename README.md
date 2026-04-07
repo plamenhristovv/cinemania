@@ -41,15 +41,30 @@ Install the required Python packages using pip:
 pip install -r requirements.txt
 ```
 
-### 4. Database Setup
-The project uses **PostgreSQL**. Ensure you have a database named `cinemania_db` created on your local PostgreSQL server. You can update the database credentials in `cinemania/settings.py` if they differ from the defaults.
+### 4. Environment Variables Configuration
+The project requires several environment variables for local development and testing (e.g., Database, Email, Security). 
+
+1. Create a `.env` file in the root directory:
+   ```bash
+   touch .env
+   ```
+2. Copy the content from `env.template` into your new `.env` file.
+3. Fill in the required values. For local testing, ensure you provide:
+   - `SECRET_KEY`: A unique string for cryptographic signing.
+   - `DEBUG`: Set to `True` for local development.
+   - `DB_*`: Your local PostgreSQL credentials.
+   - `EMAIL_*`: Your Mailjet API Key and Secret Key for email notifications.
+   - `FROM_EMAIL`: An email address verified in your Mailjet account.
+
+### 5. Database Setup
+The project uses **PostgreSQL**. Ensure you have a database created on your local PostgreSQL server that matches the `DB_NAME` in your `.env` file.
 
 Run the migrations to set up the database schema:
 ```bash
 python manage.py migrate
 ```
 
-### 5. Run the Project
+### 6. Run the Project
 Start the Django development server:
 ```bash
 python manage.py runserver
