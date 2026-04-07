@@ -41,6 +41,7 @@ class DirectorCreateView(LoginRequiredMixin, PermissionRequiredMixin,CreateView)
     form_class = DirectorCreateForm
     template_name = 'directors/director_add.html'
     success_url = reverse_lazy('directors:list')
+    permission_required = 'directors.add_director'
 
 
 class DirectorUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView):
@@ -48,6 +49,7 @@ class DirectorUpdateView(LoginRequiredMixin, PermissionRequiredMixin,UpdateView)
     form_class = DirectorUpdateForm
     template_name = 'directors/director_edit.html'
     pk_url_kwarg = 'pk'
+    permission_required = 'directors.change_director'
 
     def get_success_url(self):
         return reverse_lazy('directors:details', kwargs={'pk': self.object.pk})
@@ -58,3 +60,4 @@ class DirectorDeleteView(LoginRequiredMixin, PermissionRequiredMixin,DeleteView)
     template_name = 'directors/director_delete.html'
     success_url = reverse_lazy('directors:list')
     pk_url_kwarg = 'pk'
+    permission_required = 'directors.delete_director'

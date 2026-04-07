@@ -1,5 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from model_bakery import baker
 from directors.models import Director
 
@@ -50,6 +52,16 @@ class DirectorDetailViewTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
 class DirectorCreateViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='password')
+        content_type = ContentType.objects.get_for_model(Director)
+        permission = Permission.objects.get(
+            codename='add_director',
+            content_type=content_type,
+        )
+        self.user.user_permissions.add(permission)
+        self.client.login(username='testuser', password='password')
+
     def test_create_view_get_request(self):
         response = self.client.get(reverse('directors:add'))
 
@@ -70,6 +82,16 @@ class DirectorCreateViewTests(TestCase):
         self.assertTrue(Director.objects.filter(name='Martin Scorsese').exists())
 
 class DirectorUpdateViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='password')
+        content_type = ContentType.objects.get_for_model(Director)
+        permission = Permission.objects.get(
+            codename='change_director',
+            content_type=content_type,
+        )
+        self.user.user_permissions.add(permission)
+        self.client.login(username='testuser', password='password')
+
     def test_update_view_get_request(self):
         director = baker.make(Director)
 
@@ -94,6 +116,16 @@ class DirectorUpdateViewTests(TestCase):
         self.assertEqual(director.name, 'Updated Name')
 
 class DirectorDeleteViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='password')
+        content_type = ContentType.objects.get_for_model(Director)
+        permission = Permission.objects.get(
+            codename='delete_director',
+            content_type=content_type,
+        )
+        self.user.user_permissions.add(permission)
+        self.client.login(username='testuser', password='password')
+
     def test_delete_view_get_request(self):
         director = baker.make(Director)
 
