@@ -57,7 +57,7 @@ python manage.py runserver
 You can now access the application at `http://127.0.0.1:8000/`.
 
 ## Project Walkthrough
-
+### Link to the deployed project [Cinemania](https://cinemaniax-hje6ascjdbe6h9dp.swedencentral-01.azurewebsites.net/)
 
 ### Home Page
 ![Home Page](screenshots/home.png)
