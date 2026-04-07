@@ -9,6 +9,7 @@ from .forms import UserRegistrationForm, ProfileForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from movies.models import Movie
+from .tasks import send_mail_notification
 
 
 UserModel = get_user_model()
