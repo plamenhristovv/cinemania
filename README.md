@@ -61,19 +61,33 @@ You can now access the application at `http://127.0.0.1:8000/`.
 
 ### Home Page
 ![Home Page](screenshots/home.png)
+* The home page welcomes you to Cinemania and provides an overview of the application's features. You can navigate to different sections using the navigation bar at the top.
+* If you are not logged in, you can click on **Login** to access your account or **Sign up** to create a new account.
+
+### Signing up
+Using the sign-up form, you can create a new account to start your journey.
+![Sign Up](screenshots/sign_up.png)
+
+### Logging in
+If you already have an account, you can log in using the login form.
+![Login](screenshots/login.png)
 
 ### Movie Management  
 
 #### Viewing Movies
-* Click on **Movies** in the navigation to view the movies you have added. There you can manage your movies and explore their details.  
-* Click on **Add Movie** to add a new movie to your collection. 
+* Click on **Movies** in the navigation to view the movies added to the database. There you can manage the movies and explore their details.  
+* Click on **Add Movie** to add a new movie to the database. Only users that have logged in and have the appropriate permissions can add movies to the database.
 * Type in the search bar to filter movies by title. Click on **Search** to apply the filter.
 * Click on the **movie poster** to view details about the movie. 
 ![Movies List](screenshots/movies_list.png)
 
 #### Movie Details 
+Here you can view the movie details.  
+Only users that have **logged in** and have the appropriate **permissions** can edit or delete movies from the database.
 * Click on **Edit Movie** to edit the movie details.  
 * Click on **Delete** to delete the movie.  
+* Click on **add to watched** to add the movie to your watched movies.
+* If the movie has studios associated with it, click on the studio name to view details about the studio.
 * Click on **Directed by** to view the director's details.
 * Click on **Back to Movies** to return to the movies.
 
@@ -101,14 +115,16 @@ Click on **Cancel** to discard the changes you made to the movie details.
 
 ### Director Tracking
 Keep track of all the directors whose work you have seen.
-* Click on **Directors** in the navigation to view the directors you have added.  
+* Click on **Directors** in the navigation to view the directors you have added.
+* Only users that are logged in and have the appropriate permissions can add and edit directors.
 * Click on **Add Director** to add a new director to your collection.
 * Type in the search bar to filter directors by name. Click on **Search** to apply the filter.
 * Click on the director's picture to view details about the director.
 ![Directors](screenshots/directors_list.png)
 
 #### Director Details
-Here you can view the director's details and their filmography you have seen.  
+Here you can view the director's details and their filmography that have been added to the database.
+Only users that have **logged in** and have the appropriate **permissions** can edit or delete directors from the database.
 * Click on **Edit** to edit the director details.  
 * Click on **Delete** to delete the director.  
 * Click on **Back to Directors** to return to the directors list.
@@ -152,3 +168,14 @@ Click on **Discard Changes** to discard the changes you made to the list details
 Click on **Yes, delete list** to confirm the deletion.  
 Click on **No, keep list** to cancel the deletion.
 ![Delete List](screenshots/list_delete.png)
+
+### Studios
+* Click on **Studios** in the navigation to view the studios added to the database.
+* Only users that have logged in and have the appropriate permissions can add and edit studios.
+* Clcik on **API documentation** to add studios to the database using the API endpoint.
+* Click on the particular studio to view details about the studio and the movies associated with it.
+![Studios View](screenshots/studios_list.png)
+
+#### Studio Details
+Here you can view the studio details and the movies associated with it.
+![Studio Details](screenshots/studio_detail.png)
